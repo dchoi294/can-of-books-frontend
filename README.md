@@ -1,38 +1,36 @@
 # Can of Books
 
 **Author**: Don Choi, Deshon Dixon
-**Version**: 1.0.0 
+**Version**: 1.0.0
 
 ## What can books do?
 
 Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next.
 
-
 ## Architecture
 
+Building CRUD apps with MongoDB
 
 ## Estimates
 
 
 ## Change Log
 
-Name of feature: Front-End Build
+Name of feature: Front-End Build, class github
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 6 hours
 
-Start time: 
+Start time: 13:10
 
-Finish time: 
+Finish time: 15:16
 
-Actual time needed to complete: 
+Actual time needed to complete: 2 hours and 6 minutes.
 
 
 ## Credit, Collaborations, Attached Links
 
-Project Board: 
-Deployed Version:
-
-
+Project Board: [Trello](https://trello.com/c/X0bEpyAK/5-1-set-up-your-repositories)
+Deployed Version: [Netlify](https://can-of-books-dondeshon.netlify.app)
 
 ## Logistical
 
