@@ -10,7 +10,7 @@ class Header extends React.Component {
         <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
         {/* PLACEHOLDER: render a navigation link to the about page */}
       </Navbar>
-    )
+    );
   }
 }
 

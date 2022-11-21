@@ -5,7 +5,7 @@ class BestBooks extends React.Component {
     super(props);
     this.state = {
       books: []
-    }
+    };
   }
 
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
@@ -24,7 +24,7 @@ class BestBooks extends React.Component {
           <h3>No Books Found :(</h3>
         )}
       </>
-    )
+    );
   }
 }
 
