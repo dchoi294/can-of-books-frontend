@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import {Carousel, Container} from 'react-boostrap';
+import {Carousel, Container} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import holder from './holder'
 
 let SERVER = process.env.REACT_APP_SERVER;
 
@@ -32,16 +34,18 @@ class BestBooks extends React.Component {
   render() {
 
     /* TODO: render all the books in a Carousel */
-    let carouselItems = this.state.books.map(book => (
+    let carouselBooks = this.state.books.map((book) => (
       <Carousel.Item key={book._id}>
+        <img
+        className="books"
+        src={holder.src}
+        alt={book.title}
+        />
         <Carousel.Caption>
           <h3 style={{ backgroundColor: 'teal', borderRadius: '5px', width: 'max-content', margin: 'auto', padding: '5px' }}>Title: {book.title}</h3>
+          <p> is about {book.description}</p>
         </Carousel.Caption>
       </Carousel.Item>
-    ))
-
-    let books = this.state.books.map((book) => (
-      <p key={book._id}>{book.title} is about {book.description}</p>
     ))
 
         return (
@@ -49,18 +53,14 @@ class BestBooks extends React.Component {
           <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
           {this.state.books.length > 0 ? (
-            { books }
+            <Container>
+            <Carousel>
+              {carouselBooks}
+            </Carousel>
+          </Container>
           ) : (
             <h3>No Books Found :(</h3>
           )}
-
-          {
-            <Container>
-              <Carousel>
-                {carouselItems}
-              </Carousel>
-            </Container>
-          }
         </>
         );
   }
