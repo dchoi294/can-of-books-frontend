@@ -1,0 +1,12 @@
+{
+  "basic_info": {
+    "description_header": "Hi",
+    "description": "👋 We are Deshon Dixon and Don Choi. We are software developer and student at codeFellows.",
+    "section_name": {
+      "about": "About me",
+      "projects": "Projects",
+      "skills": "Skills",
+      "experience": "Experience"
+    }
+  }
+}
