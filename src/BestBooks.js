@@ -32,13 +32,13 @@ class BestBooks extends React.Component {
   }
 
   render() {
-
+    console.log(holder[0]);
     /* TODO: render all the books in a Carousel */
     let carouselBooks = this.state.books.map((book) => (
       <Carousel.Item key={book._id}>
         <img
         className="books"
-        src={holder.src}
+        src="https://images.unsplash.com/photo-1523593288094-3ccfb6b2c192?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1014&q=80"
         alt={book.title}
         />
         <Carousel.Caption>
