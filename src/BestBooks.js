@@ -12,7 +12,9 @@ class BestBooks extends React.Component {
     super(props);
     this.state = {
       books: [],
-      isModalShown: false
+      isModalShown: false,
+      switch: 'add',
+      bookToChange: {}
     };
   }
 
@@ -66,6 +68,37 @@ class BestBooks extends React.Component {
     }
   }
 
+  updateBooks = async (bookToUpdate) => {
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/books/${bookToUpdate._id}`;
+      let updateBookObj = await axios.put(url, bookToUpdate);
+      // find the book we updated in state and replace it with the data we got back from the DB
+      let updatedBooksArray  = this.state.books.map(book => {
+        return book._id === bookToUpdate._id ? updateBookObj.data : book;
+      });
+      this.setState({
+        books: updatedBooksArray,
+      });
+    } catch (err) {
+      console.log('We have an error: ', err.response.data);
+    }
+  }
+
+  handleBookUpdate = (event) => {
+    event.preventDefault();
+    let Book = {
+      title: event.target.title.value || this.state.bookToChange.title,
+      description: event.target.description.value || this.state.bookToChange.description,
+      status: event.target.status.checked || this.state.bookToChange.status,
+      __v: 0,
+      _id: this.state.bookToChange._id,
+    }
+    this.setState({
+      isModalShown: false,
+    })
+    this.updateBooks(Book);
+  }
+
   handleBookSubmit = (event) => {
     event.preventDefault();
     let newBook = {
@@ -87,13 +120,14 @@ class BestBooks extends React.Component {
       <Carousel.Item key={book._id}>
         <img
           className="books"
-          src="https://images.unsplash.com/photo-1523593288094-3ccfb6b2c192?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1014&q=80"
+          src="https://assets.brightspot.abebooks.a2z.com/dims4/default/de7428b/2147483647/strip/true/crop/400x300+0+0/resize/620x465!/quality/90/?url=http%3A%2F%2Fabebooks-brightspot.s3.amazonaws.com%2F3d%2Fd0%2F377fac1c424a824dede413c301f1%2Frare-books.png"
           alt={book.title}
         />
         <Carousel.Caption>
           <h3 style={{ backgroundColor: 'teal', borderRadius: '5px', width: 'max-content', margin: 'auto', padding: '5px' }}>BestBook: {book.title}</h3>
           <p> is about {book.description}</p>
           <Button onClick={() => this.deleteBooks(book._id)}>Delete Book</Button>
+          <Button onClick={() => this.setState({isModalShown: true, mode: 'update', bookToChange: book})}>Update Book</Button>
         </Carousel.Caption>
       </Carousel.Item>
     ))
@@ -116,7 +150,11 @@ class BestBooks extends React.Component {
         <BookFormModal
           show={this.state.isModalShown}
           onHide={this.closeModal}
+          mode={this.state.mode}
           handleSubmit={this.handleBookSubmit}
+          handleBookUpdate={this.handleBookUpdate}
+          updateBooks={this.updateBooks}
+          bookToChange={this.state.bookToChange}
         />
       </>
     );

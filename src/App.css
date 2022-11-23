@@ -1,3 +1,10 @@
-#link {
+.nav-link {
+  color:white;
+  padding:20px;
+}
+
+.nav-link:hover {
   color:blue;
+  font-size:large;
+  font-family: fantasy;
 }
