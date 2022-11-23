@@ -13,18 +13,17 @@ Building CRUD apps with MongoDB
 
 ## Estimates
 
-
 ## Change Log
 
 Name of feature: Front-End Build, class github
 
 Estimate of time needed to complete: 6 hours
 
-Start time: 13:10
+Start time: 14:00
 
-Finish time: 17:16
+Finish time: 17:36
 
-Actual time needed to complete: 4 hours and 6 minutes.
+Actual time needed to complete: 3 hours and 36 minutes.
 
 
 ## Credit, Collaborations, Attached Links
