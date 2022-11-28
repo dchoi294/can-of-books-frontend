@@ -12,21 +12,21 @@ class BookFormModal extends React.Component {
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title>{this.props.mode === 'switch' ? 'Add Books' : 'Update Books'} </Modal.Title>
+            <Modal.Title>{this.props.mode === 'add' ? 'Add Books' : 'Update Books'}</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
 
-            <Form onSubmit={this.props.mode === 'switch' ? this.props.handleSubmit : this.props.handleBookUpdate}>
+            <Form onSubmit={this.props.mode === 'add' ? this.props.handleAddBook : this.props.handleUpdateBook}>
 
               <Form.Group className="mb-3" controlId="title">
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder={this.props.mode === 'switch' ? "Title" : this.props.bookToChange.title}/>
+                <Form.Control type="text" placeholder={this.props.mode === 'add' ? "Title" : this.props.bookToChange.title}/>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="description">
                 <Form.Label>Description</Form.Label>
-                <Form.Control type="text" placeholder={this.props.mode === 'switch' ? "Add description" : this.props.bookToChange.description}/>
+                <Form.Control type="text" placeholder={this.props.mode === 'add' ? "Add description" : this.props.bookToChange.description}/>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="status">

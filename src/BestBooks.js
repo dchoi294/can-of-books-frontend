@@ -13,7 +13,7 @@ class BestBooks extends React.Component {
     this.state = {
       books: [],
       isModalShown: false,
-      switch: 'add',
+      mode: 'add',
       bookToChange: {}
     };
   }
@@ -151,8 +151,8 @@ class BestBooks extends React.Component {
           show={this.state.isModalShown}
           onHide={this.closeModal}
           mode={this.state.mode}
-          handleSubmit={this.handleBookSubmit}
-          handleBookUpdate={this.handleBookUpdate}
+          handleAddBook={this.handleBookSubmit}
+          handleUpdateBook={this.handleBookUpdate}
           updateBooks={this.updateBooks}
           bookToChange={this.state.bookToChange}
         />
