@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import BookFormModal from './BookFormModal';
+import './App.css';
 import {Button, Carousel, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -115,7 +116,6 @@ class BestBooks extends React.Component {
 
   render() {
     /* TODO: render all the books in a Carousel */
-
     let carouselBooks = this.state.books.map((book) => (
       <Carousel.Item key={book._id}>
         <img
