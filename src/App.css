@@ -8,3 +8,10 @@
   font-size:large;
   font-family: fantasy;
 }
+
+.books {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
