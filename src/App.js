@@ -6,7 +6,8 @@ import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 import { withAuth0 } from '@auth0/auth0-react';
 import About from './About';
-import Content from './Content'
+import Content from './Content';
+import Profile from './Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {
@@ -22,23 +23,32 @@ class App extends React.Component {
       <>
         <Router>
           <Header />
-          <Routes>
-            <Route
-              exact path="/"
-              element={<BestBooks />}
-            >
-            </Route>
-
-            <Route
-              exact path="/about"
-              element={<About />}
-            >
-            </Route>
-          </Routes>
           <h1>new</h1>
           {this.props.auth0.isAuthenticated ? <LogoutButton /> : <LoginButton />}
 
-          {this.props.auth0.isAuthenticated ? <Content /> : <h2>Please Log in</h2>}
+          {this.props.auth0.isAuthenticated ?
+            <Routes>
+              <Route
+                exact path="/"
+                element={<BestBooks />}
+              >
+              </Route>
+
+              <Route
+                exact path="/about"
+                element={<About />}
+              >
+              </Route>
+
+              <Route
+                exact path="/profile"
+                element={<Profile />}
+              >
+              </Route>
+            </Routes>
+            : <Content />}
+
+
           <Footer />
         </Router>
       </>

@@ -38,8 +38,6 @@ class Content extends React.Component {
   }
 
   render() {
-    console.log(this.props.auth0.user);
-
     return (
       <h2>Content Page</h2>
     )

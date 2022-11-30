@@ -1,6 +1,10 @@
 .nav-link {
+  background-color: beige;
   color:white;
   padding:20px;
+  border-radius: 3rem;
+  display:flexbox;
+  justify-content: space-between;
 }
 
 .nav-link:hover {
