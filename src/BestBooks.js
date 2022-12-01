@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import BookFormModal from './BookFormModal';
+import { withAuth0 } from '@auth0/auth0-react';
 import './App.css';
-import {Button, Carousel, Container } from 'react-bootstrap';
+import { Button, Carousel, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -35,10 +36,36 @@ class BestBooks extends React.Component {
 
   getBooks = async () => {
     try {
-      let results = await axios.get(`${SERVER}/books`);
-      this.setState({
-        books: results.data
-      })
+      if (this.props.auth0.isAuthenticated) {
+
+        // get the token from Auth0
+        const res = await this.props.auth0.getIdTokenClaims();
+
+        // extract the token from the response
+        // MUST use double underscore
+        const jwt = res.__raw;
+        console.log(jwt); // this is as for as you need to go for today's lab. Get the token to log in the console.
+
+        // this is from the axios docs, we can send a config object to make our axios calls. We need it to send our token to the server:
+        let config = {
+          method: 'get',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: '/books',
+          headers: {
+            "Authorization": `Bearer ${jwt}`
+          }
+        }
+        console.log(config);
+        let bookResults = await axios(config);
+
+        // // Old way we are used to making axios requests:
+        // let url = `${process.env.REACT_APP_SERVER_URL}/books`;
+        // let bookResults = await axios.get(url);
+        console.log(bookResults.data);
+        this.setState({
+          books: bookResults.data
+        });
+      }
     } catch (error) {
       console.log('we have an error: ', error.response.data)
     }
@@ -47,7 +74,6 @@ class BestBooks extends React.Component {
   postBooks = async (aBook) => {
     try {
       let bookAdded = await axios.post(`${SERVER}/books`, aBook);
-      console.log(bookAdded);
       this.setState({
         books: [...this.state.books, bookAdded.data]
       })
@@ -74,7 +100,7 @@ class BestBooks extends React.Component {
       let url = `${process.env.REACT_APP_SERVER}/books/${bookToUpdate._id}`;
       let updateBookObj = await axios.put(url, bookToUpdate);
       // find the book we updated in state and replace it with the data we got back from the DB
-      let updatedBooksArray  = this.state.books.map(book => {
+      let updatedBooksArray = this.state.books.map(book => {
         return book._id === bookToUpdate._id ? updateBookObj.data : book;
       });
       this.setState({
@@ -127,7 +153,7 @@ class BestBooks extends React.Component {
           <h3 style={{ backgroundColor: 'teal', borderRadius: '5px', width: 'max-content', margin: 'auto', padding: '5px' }}>BestBook: {book.title}</h3>
           <p> is about {book.description}</p>
           <Button onClick={() => this.deleteBooks(book._id)}>Delete Book</Button>
-          <Button onClick={() => this.setState({isModalShown: true, mode: 'update', bookToChange: book})}>Update Book</Button>
+          <Button onClick={() => this.setState({ isModalShown: true, mode: 'update', bookToChange: book })}>Update Book</Button>
         </Carousel.Caption>
       </Carousel.Item>
     ))
@@ -161,4 +187,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);

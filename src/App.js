@@ -6,7 +6,7 @@ import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 import { withAuth0 } from '@auth0/auth0-react';
 import About from './About';
-import Content from './Content';
+import Welcome from './Welcome';
 import Profile from './Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -46,7 +46,25 @@ class App extends React.Component {
               >
               </Route>
             </Routes>
-            : <Content />}
+            : <Routes>
+            <Route
+              exact path="/"
+              element={<Welcome />}
+            >
+            </Route>
+
+            <Route
+              exact path="/about"
+              element={<About />}
+            >
+            </Route>
+
+            <Route
+              exact path="/profile"
+              element={<Profile />}
+            >
+            </Route>
+          </Routes>}
 
 
           <Footer />
